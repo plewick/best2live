@@ -128,6 +128,7 @@ heatmap = ""
                     $(".tt").addClass "open"
 
                 $(".tt").on "click touch", (e)->
+                    e.stopPropagation()
                     $(this).removeClass "open"
                     App.setcookie("tt",1,2)
         cookies = 

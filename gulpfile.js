@@ -40,8 +40,8 @@ gulp.task('compress', function() {
         bowerPath+'jquery-migrate/jquery-migrate.min.js',
         bowerPath+'heatmap.js-amd/build/heatmap.js',
         bowerPath+'heatmap.js-amd/plugins/gmaps-heatmap/gmaps-heatmap.js',
-        coffeePath+'main.coffee',
         jspath+'main.js',
+        coffeePath+'main.coffee',
         ])
         .pipe(gulpif(/[.]coffee$/, coffee({bare: true}).on('error', gutil.log)))
         .pipe(jshint().on("error",gutil.log))

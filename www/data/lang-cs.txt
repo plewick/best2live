@@ -1,0 +1,17 @@
+#lang-about <h2>O projektu</h2> <p> Projekt Best2Live je tady aby poskytl informace o oblastech v Praze, která jsou nejlepší k životu. </p> <p> Bereme data z několika zdrojů jakou jsou: </p> <ul> <li>Mapy kriminality</li> <li>Rychlost internetu</li> <li>Hlukové mapy</li> <li>Znečištění ovzduší</li> <li>a více...</li> </ul> <p> Pomocí těchto informací rozsvítíme místa na mapě abyste hned viděli které oblasti jsou nejlepší a ty, které naopak zaostávají</p>
+
+#howtoread Jak tuto mapu chápat?
+#lang-bad Špatné
+#lang-good Dobré
+#lang-simple Je to jednoduché
+#lang-about O projektu
+#lang-map Mapa
+#lang-selectqualities Jak jsou pro vás důležité tyto hodnoty?
+#lang-distancefromscrools Vzdálenost od škol
+#lang-distancefromparks Vzdálenost od parků
+lang-high Velmi
+lang-mid Středně
+lang-low Málo
+#apply Použít
+#tooltip-a Zde můžete nastavit jak jsou které hodnoty pro vás důležité
+#lang-preferences Nastavte své preference
