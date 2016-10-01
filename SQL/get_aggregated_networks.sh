@@ -1,0 +1,1 @@
+psql --host 13.93.50.100 -U postgres -d hacks -W -t -A -F"," -c "SELECT pg.pos, AVG(up) as up, AVG(down) as down, AVG(ping) as ping, tech FROM netmetr AS n RIGHT JOIN prague_grid AS pg ON ST_DWithin(pg.pos, n.pos, 700) GROUP BY pg.pos, n.tech;" > ../data/aggregated_netmonitor.csv

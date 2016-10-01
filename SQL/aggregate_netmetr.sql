@@ -1,0 +1,1 @@
+INSERT INTO a_netmetr(pos,up,down,ping,tech,pos_id) (SELECT pg.pos, AVG(up) as up, AVG(down) as down, AVG(ping) as ping, tech, pg.id FROM netmetr AS n RIGHT JOIN prague_grid AS pg ON ST_DWithin(pg.pos, n.pos, 700) GROUP BY pg.pos, pg.id, n.tech);
