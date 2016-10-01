@@ -39,6 +39,7 @@
         <div class="head">
             <h1 class="site-title"><img src="/images/best2live-logo.svg" width="180" alt="Best2live"></h1>
         </div>
+        <div id="info-toggler" class="fa fa-info"></div>
         <nav class="site-nav main-nav">
             <div class="hamburger">
                 <div class="hamico"></div>
@@ -64,7 +65,30 @@
             </div>
         </div>
     </div>
-    <div class="filter-modal">
+    <div id="loader" class="loader">
+        <div class="spinner spinner__1"></div>
+    </div>
+    <div class="legend-modal modal">
+        <div class="modal-hold">
+            <h3>How to read this map?
+            <div class="fa fa-close"></div>
+            </h3>
+            <p>Simplest thing in the world...</p>
+            <div class="infograph">
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <div class="good"><div class="fa 
+                            fa-smile-o"></div> Good</div>
+                    </div>
+                    <div class="pure-u-1-2">
+                        <div class="bad">Bad <div class="fa fa-frown-o"></div></div>
+                    </div>
+                </div>
+                <div class="grad-line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-modal modal">
         <div class="modal-hold">
             <h3>
                 Select importance of following qualities

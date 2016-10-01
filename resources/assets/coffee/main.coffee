@@ -9,7 +9,7 @@ heatmap = ""
                     center: 
                         lat: 50.0731932
                         lng: 14.4072928
-                    zoom: 11
+                    zoom: 12
                     streetViewControl: false
                     fullscreenControl: false
                     mapTypeControl: false
@@ -37,12 +37,14 @@ heatmap = ""
                 App.getData(heatmap)
             getData: (heatmap, d)->
                 #console.log d
+                $("#loader").fadeIn(150);
                 $.ajax( 
                     dataType: "json"
                     url: "/data/bigdata.json"
                     data: d
                     success: (data)->
                         #console.log data
+                        $("#loader").fadeOut(150);
                         App.displayData(heatmap,data)
 
                 )
@@ -54,16 +56,28 @@ heatmap = ""
                 }
                 heatmap.setData(heatData)
                 #console.log heatmap
-        filterHandler =
+        modals =
+            initModals: ->
+                App.generalModals()
+                App.legendModal()
+                App.filterInit()
+            generalModals: ->
+                $(".modal .fa-close").on "click touch", (e)->
+                    $(this).parents(".modal").fadeOut(500)
+            legendModal: ->
+                $("#info-toggler").on "click touch", (e)->
+                    $(".legend-modal").fadeIn(500)
+
+                
             filterInit: ->
                 $(".map-options-toggler").on "click touch", (e)->
                     $(".filter-modal").fadeIn(500)
-                $(".filter-modal .fa-close").on "click touch", (e)->
-                    $(".filter-modal").fadeOut(500)
                 $(".filter-modal").find(".button").on "click touch", (e)->
                     dfp = $("#dfp").find("input:checked").val()
                     dfs = $("#dfs").find("input:checked").val()
                     zoom = map.getZoom()
+
+                    #in case I'll decide to do something more with this...
                     bounds = {
                         ne : {}   
                         sw : {}   
@@ -72,10 +86,6 @@ heatmap = ""
                     bounds.ne.lat = map.getBounds().getNorthEast().lat()
                     bounds.sw.lng = map.getBounds().getSouthWest().lng()
                     bounds.sw.lat = map.getBounds().getSouthWest().lat()
-                    console.log bounds.ne.lat
-                    console.log bounds.ne.lng
-                    console.log bounds.sw.lat
-                    console.log bounds.sw.lng
                     d = {
                         dfp: dfp
                         dfs: dfs
@@ -144,8 +154,9 @@ heatmap = ""
     $(document).ready ->
         console.log "CS Ready"
         App.initMap()
-        App.filterInit()
+        App.initModals()
         App.menu()
         App.contentLayerInit()
         App.tt()
+
 ) jQuery
