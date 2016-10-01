@@ -1,14 +1,48 @@
 App = {}
+map = ""
 (($) ->
     App = $.extend(App,
         mapHandler = 
-            initMap = ->
+            initMap : (e)->
                 map = new google.maps.Map(document.getElementById('map'),
                     center: 
-                        lat: 15
-                        lng: 15
+                        lat: 50
+                        lng: 14
                     zoom: 8
+                )
+                App.heatMap()
+                return
+            mapTest : (e)->
+                console.log "OK"
+            heatMap: (e) ->
+                heatmap = new HeatmapOverlay(map,
+                        "radius": 0.01
+                        "maxOpacity": .5
+                        "scaleRadius": true
+                        "useLocalExtrema": true
+                        latField: "lat"
+                        lngField: "lng"
+                        valueField: "id"
                     )
+                App.getData(heatmap)
+            getData: (heatmap)->
+                $.ajax( 
+                    dataType: "json"
+                    url: "/data/praguemap.json"
+
+                    success: (data)->
+                        console.log data
+                        App.displayData(heatmap,data)
+
+                )
+            displayData: (heatmap,data)->
+                console.log "setting data"
+                heatData = {
+                    max: 4000
+                    data: data
+                }
+                heatmap.setData(heatData)
+                console.log heatmap
         layout = 
             menu: ->
                 $('.hamburger').on 'click touch', (event) ->
@@ -38,5 +72,5 @@ App = {}
     
     $(document).ready ->
         console.log "CS Ready"
-        App.initMap
+        App.initMap()
 ) jQuery

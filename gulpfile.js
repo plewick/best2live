@@ -38,6 +38,8 @@ gulp.task('compress', function() {
     return gulp.src([        
         bowerPath+'jquery/dist/jquery.min.js',
         bowerPath+'jquery-migrate/jquery-migrate.min.js',
+        bowerPath+'heatmap.js-amd/build/heatmap.js',
+        bowerPath+'heatmap.js-amd/plugins/gmaps-heatmap/gmaps-heatmap.js',
         coffeePath+'main.coffee',
         jspath+'main.js',
         ])
