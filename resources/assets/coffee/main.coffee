@@ -62,6 +62,10 @@ heatmap = ""
                 App.legendModal()
                 App.filterInit()
             generalModals: ->
+                $(".modal").on "click touch", (e)->
+                    $(this).fadeOut(500)
+                $(".modal-hold").on "click touch", (e)->
+                    e.stopPropagation()
                 $(".modal .fa-close").on "click touch", (e)->
                     $(this).parents(".modal").fadeOut(500)
             legendModal: ->

@@ -156,7 +156,7 @@
             
         </div>
         <div id="about" class="content-overlay">
-            <div class="language-select en" id="lang-about">
+            <div class="language-select" id="lang-aboutcontent">
                 <h2>About this project</h2>
                 <p>
                     Project Best2Live is here to give you visualised information about areas in Prague that are most suitable for living.
