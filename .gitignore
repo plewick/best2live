@@ -1,0 +1,7 @@
+!.gitignore
+!.gitignore
+!.htaccess
+resources/assets/bower_components/*
+node_modules
+.idea
+npm-debug.log

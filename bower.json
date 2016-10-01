@@ -1,0 +1,23 @@
+{
+  "name": "plewick/best2live",
+  "version": "1.0.0",
+  "authors": [
+    "Jan Pleva <plevahonza@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "resources/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "<2",
+    "jquery-migrate": "~1.2.1"
+  },
+  "devDependencies": {
+    "heatmap.js-amd": "^2.0.5"
+  }
+}
