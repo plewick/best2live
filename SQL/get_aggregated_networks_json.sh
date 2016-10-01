@@ -1,1 +1,1 @@
-psql --host 13.93.50.100 -U postgres -d hacks -W -t -A -F"," -c "SELECT row_to_json(row(t)) FROM (SELECT ST_AsGeoJSON(pos)::json As geometry, up, down, ping, tech, pos_id from a_netmetr) t;" > ../data/aggregated_netmonitor.json
+psql --host 13.93.50.100 -U postgres -d hacks -W -t -A -F"," -c "SELECT array_to_json(array_agg(t)) FROM (SELECT ST_X(pos::geometry) as lng, ST_Y(pos::geometry) as lat, up, down, ping, tech, pos_id from a_netmetr) t;" > ../data/aggregated_netmonitor.json
