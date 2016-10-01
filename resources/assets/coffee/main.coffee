@@ -1,14 +1,18 @@
 App = {}
 map = ""
+heatmap = ""
 (($) ->
     App = $.extend(App,
         mapHandler = 
             initMap : (e)->
                 map = new google.maps.Map(document.getElementById('map'),
                     center: 
-                        lat: 50
-                        lng: 14
-                    zoom: 8
+                        lat: 50.0731932
+                        lng: 14.4072928
+                    zoom: 11
+                    streetViewControl: false
+                    fullscreenControl: false
+                    mapTypeControl: false
                 )
                 App.heatMap()
                 return
@@ -16,39 +20,106 @@ map = ""
                 console.log "OK"
             heatMap: (e) ->
                 heatmap = new HeatmapOverlay(map,
-                        "radius": 0.01
-                        "maxOpacity": .5
+                        "radius": 0.005 
+                        "maxOpacity": .3
                         "scaleRadius": true
                         "useLocalExtrema": true
                         latField: "lat"
                         lngField: "lng"
-                        valueField: "id"
+                        valueField: "count"
+                        gradient:
+                            ".7": "#e56706"
+                            "1": "#45efd9"
                     )
+                d = {
+                    zoom: map.getZoom()
+                }
                 App.getData(heatmap)
-            getData: (heatmap)->
+            getData: (heatmap, d)->
+                #console.log d
                 $.ajax( 
                     dataType: "json"
-                    url: "/data/praguemap.json"
-
+                    url: "/data/bigdata.json"
+                    data: d
                     success: (data)->
-                        console.log data
+                        #console.log data
                         App.displayData(heatmap,data)
 
                 )
             displayData: (heatmap,data)->
                 console.log "setting data"
                 heatData = {
-                    max: 4000
+                    max: 1000
                     data: data
                 }
                 heatmap.setData(heatData)
-                console.log heatmap
+                #console.log heatmap
+        filterHandler =
+            filterInit: ->
+                $(".map-options-toggler").on "click touch", (e)->
+                    $(".filter-modal").fadeIn(500)
+                $(".filter-modal .fa-close").on "click touch", (e)->
+                    $(".filter-modal").fadeOut(500)
+                $(".filter-modal").find(".button").on "click touch", (e)->
+                    dfp = $("#dfp").find("input:checked").val()
+                    dfs = $("#dfs").find("input:checked").val()
+                    zoom = map.getZoom()
+                    bounds = {
+                        ne : {}   
+                        sw : {}   
+                    }
+                    bounds.ne.lng = map.getBounds().getNorthEast().lng()
+                    bounds.ne.lat = map.getBounds().getNorthEast().lat()
+                    bounds.sw.lng = map.getBounds().getSouthWest().lng()
+                    bounds.sw.lat = map.getBounds().getSouthWest().lat()
+                    console.log bounds.ne.lat
+                    console.log bounds.ne.lng
+                    console.log bounds.sw.lat
+                    console.log bounds.sw.lng
+                    d = {
+                        dfp: dfp
+                        dfs: dfs
+                        nelng: bounds.ne.lng
+                        nelat: bounds.ne.lat
+                        swlng: bounds.sw.lng
+                        swlat: bounds.sw.lat
+                        zoom: zoom
+                    }
+                    console.log "bounds" 
+                    console.log bounds 
+                    $(".filter-modal").fadeOut(500)
+                    App.getData(heatmap,d)
+        contentLayer =
+            contentLayerInit: (e)->
+                $(".main-menu a").each ->
+                    $(@).on "click touch", (e)->
+                        e.preventDefault()
+                        $('.main-nav').removeClass "mobile-open"
+                        href = ($(this).attr("href"))
+                        if href != "#map"
+                            $(href)
+                                .addClass "open-block"
+                                .siblings()
+                                .removeClass "open-block"
+                        else
+                            $(".content-overlay").each ->
+                                $(this).removeClass "open-block"
+                            console.log "not map"
         layout = 
             menu: ->
                 $('.hamburger').on 'click touch', (event) ->
                     event.preventDefault()
                     $(this).parents('.main-nav').toggleClass 'mobile-open'
                     return
+            tt: ->
+                cookie = App.readcookie("tt")
+                console.log cookie
+                if cookie != "1"
+                    $(".tt").addClass "open"
+
+                $(".tt").on "click touch", (e)->
+                    $(this).removeClass "open"
+                    App.setcookie("tt",1,2)
         cookies = 
             setcookie: (cname, cvalue, exdays) ->
                 d = new Date
@@ -73,4 +144,8 @@ map = ""
     $(document).ready ->
         console.log "CS Ready"
         App.initMap()
+        App.filterInit()
+        App.menu()
+        App.contentLayerInit()
+        App.tt()
 ) jQuery
