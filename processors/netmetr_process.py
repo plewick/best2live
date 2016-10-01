@@ -2,7 +2,6 @@ import json
 from glob import glob
 import scipy
 
-
 PROPS = {"download_kbit", "upload_kbit", "ping_ms"}
 
 for f in glob("../data/netmetr_*"):
@@ -18,4 +17,5 @@ for f in glob("../data/netmetr_*"):
             "avg": scipy.mean(d),
             "median": scipy.median(d),
         }
-    print stats
+        
+    print(stats)
