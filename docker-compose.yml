@@ -1,25 +1,11 @@
 version: '2'
 services:
-    ssl_proxy:
-        image: jwilder/nginx-proxy
-        volumes:
-            - certs:/etc/nginx/certs
-            - /etc/nginx/vhost.d
-            - /usr/share/nginx/html
-            - /var/run/docker.sock:/tmp/docker.sock:ro
-        links:
-            - web
-    letsencrypt:
-        image: jrcs/letsencrypt-nginx-proxy-companion
-        volumes:
-            - certs:/etc/nginx/certs:ro
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-        volumes_from:
-            - ssl_proxy
     web:
         build: www
         links:
         - api
+        ports:
+        - "80:80"
     api:
         build: server
         ports:
