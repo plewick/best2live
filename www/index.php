@@ -249,6 +249,10 @@
             </div>
         </div>
     </div>
+    <div id="refresher">
+        <span class="fa fa-refresh"></span>
+        <span id="lang-refresh">Refresh</span>
+    </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlvXX4W8lnEZb7GFb-zVCQ-BryPwuu50k"></script>
     <script src="/js/app.min.js" async defer></script>
 </body>

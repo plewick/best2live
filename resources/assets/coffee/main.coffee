@@ -2,6 +2,7 @@ App = {}
 map = ""
 heatmap = ""
 (($) ->
+    masterto = false
     App = $.extend(App,
         mapHandler = 
             initMap : (e)->
@@ -15,7 +16,26 @@ heatmap = ""
                     mapTypeControl: false
                 )
                 App.heatMap()
+
                 return
+            eventHandler:(e)->
+                google.maps.event.addListener map, "bounds_changed",->
+                    console.log "changed"
+                    App.refreshShow()
+                $("#refresher").on "click touch", (e)->
+                    App.getData(heatmap)
+            refreshShow: (e)->
+                if masterto
+                    clearTimeout(masterto)
+                    masterto = false
+                if not masterto
+                    masterto = 
+                        setTimeout (->
+                            $("#refresher").fadeIn(300)
+                            return
+                        ), 100
+
+                    
             mapTest : (e)->
                 console.log "OK"
             heatMap: (e) ->
@@ -46,6 +66,7 @@ heatmap = ""
                 }
                 google.maps.event.addListenerOnce map, 'idle', ->
                     App.getData(heatmap)
+                    App.eventHandler()
             getData: (heatmap)->
                 #console.log d
                 $("#loader").fadeIn(150);
@@ -57,6 +78,7 @@ heatmap = ""
                     success: (data)->
                         console.log data
                         $("#loader").fadeOut(150);
+                        $("#refresher").hide()
                         App.displayData(heatmap,data)
                     error:  (d) ->
                         console.log "error get"
