@@ -20,16 +20,18 @@ heatmap = ""
                 console.log "OK"
             heatMap: (e) ->
                 heatmap = new HeatmapOverlay(map,
-                        "radius": 0.005 
-                        "maxOpacity": .3
+                        "radius": 0.011 
+                        "maxOpacity": .5
                         "scaleRadius": true
                         "useLocalExtrema": true
                         latField: "lat"
                         lngField: "lng"
-                        valueField: "count"
+                        valueField: "up"
+                        minOpacity: .5
                         gradient:
-                            ".7": "#e56706"
-                            "1": "#45efd9"
+                            ".5": "#e56706"
+                            ".9": "#45efd9"
+                            ".95": "#00ffb2"
                     )
                 d = {
                     zoom: map.getZoom()
@@ -40,13 +42,15 @@ heatmap = ""
                 $("#loader").fadeIn(150);
                 $.ajax( 
                     dataType: "json"
-                    url: "/data/bigdata.json"
+                    url: "/data/aggregated_netmonitor.json"
                     data: d
                     success: (data)->
                         #console.log data
                         $("#loader").fadeOut(150);
                         App.displayData(heatmap,data)
-
+                    error:  (d) ->
+                        console.log "error get"
+                        $("#loader").fadeOut(150);
                 )
             displayData: (heatmap,data)->
                 console.log "setting data"
