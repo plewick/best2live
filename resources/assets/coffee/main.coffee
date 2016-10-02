@@ -9,7 +9,7 @@ heatmap = ""
                     center: 
                         lat: 50.0731932
                         lng: 14.4072928
-                    zoom: 12
+                    zoom: 14
                     streetViewControl: false
                     fullscreenControl: false
                     mapTypeControl: false
@@ -20,13 +20,13 @@ heatmap = ""
                 console.log "OK"
             heatMap: (e) ->
                 heatmap = new HeatmapOverlay(map,
-                        "radius": 0.011 
+                        "radius": 0.001 
                         "maxOpacity": .5
                         "scaleRadius": true
                         "useLocalExtrema": true
                         latField: "lat"
                         lngField: "lng"
-                        valueField: "up"
+                        valueField: "val"
                         minOpacity: .5
                         gradient:
                             ".1": "#b21e9e"
@@ -44,16 +44,18 @@ heatmap = ""
                 d = {
                     zoom: map.getZoom()
                 }
-                App.getData(heatmap)
-            getData: (heatmap, d)->
+                google.maps.event.addListenerOnce map, 'idle', ->
+                    App.getData(heatmap)
+            getData: (heatmap)->
                 #console.log d
                 $("#loader").fadeIn(150);
+                d = App.fetchPostData()
                 $.ajax( 
                     dataType: "json"
-                    url: "/data/aggregated_netmonitor.json"
+                    url: "http://13.93.50.100:5000/"
                     data: d
                     success: (data)->
-                        #console.log data
+                        console.log data
                         $("#loader").fadeOut(150);
                         App.displayData(heatmap,data)
                     error:  (d) ->
@@ -84,37 +86,45 @@ heatmap = ""
                 $("#info-toggler").on "click touch", (e)->
                     $(".legend-modal").fadeIn(500)
 
-                
+            findBounds: ->
+                #in case I'll decide to do something more with this...
+                bounds = {
+                    ne : {}   
+                    sw : {}   
+                }
+                console.log map.getBounds()
+                bounds.ne.lng = map.getBounds().getNorthEast().lng()
+                bounds.ne.lat = map.getBounds().getNorthEast().lat()
+                bounds.sw.lng = map.getBounds().getSouthWest().lng()
+                bounds.sw.lat = map.getBounds().getSouthWest().lat()
+                return bounds
+            fetchPostData: ->
+                zoom = map.getZoom()
+                bounds = App.findBounds()
+                local = $("#local").find("input:checked").val()
+                pollution = $("#pollution").find("input:checked").val()
+                cell = $("#cell").find("input:checked").val()
+                dfp = $("#dfp").find("input:checked").val()
+                dfs = $("#dfs").find("input:checked").val()
+                d = {
+                    dfp     : dfp
+                    dfs     : dfs
+                    pollution    : pollution
+                    cell    : cell
+                    local   : local
+                    nelng   : bounds.ne.lng
+                    nelat   : bounds.ne.lat
+                    swlng   : bounds.sw.lng
+                    swlat   : bounds.sw.lat
+                    zoom    : zoom
+                }
+                return d    
             filterInit: ->
                 $(".map-options-toggler").on "click touch", (e)->
                     $(".filter-modal").fadeIn(500)
                 $(".filter-modal").find(".button").on "click touch", (e)->
-                    dfp = $("#dfp").find("input:checked").val()
-                    dfs = $("#dfs").find("input:checked").val()
-                    zoom = map.getZoom()
-
-                    #in case I'll decide to do something more with this...
-                    bounds = {
-                        ne : {}   
-                        sw : {}   
-                    }
-                    bounds.ne.lng = map.getBounds().getNorthEast().lng()
-                    bounds.ne.lat = map.getBounds().getNorthEast().lat()
-                    bounds.sw.lng = map.getBounds().getSouthWest().lng()
-                    bounds.sw.lat = map.getBounds().getSouthWest().lat()
-                    d = {
-                        dfp: dfp
-                        dfs: dfs
-                        nelng: bounds.ne.lng
-                        nelat: bounds.ne.lat
-                        swlng: bounds.sw.lng
-                        swlat: bounds.sw.lat
-                        zoom: zoom
-                    }
-                    console.log "bounds" 
-                    console.log bounds 
                     $(".filter-modal").fadeOut(500)
-                    App.getData(heatmap,d)
+                    App.getData(heatmap)
         contentLayer =
             contentLayerInit: (e)->
                 $(".main-menu a").each ->

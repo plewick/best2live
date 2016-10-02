@@ -98,6 +98,78 @@
                 <span id="lang-selectqualities">Select importance of following qualities</span>
                 <div class="fa fa-close"></div>
             </h3>
+            <div class="holder" id="local">
+                <div class="name" id="lang-netlocal">Internet speeds (local)</div>
+                <div class="input">
+                    <input id="local-h" type="radio" name="local" value="2">
+                    <label for="local-h">
+                        <div class="check"></div>
+                        <div class="input-label"><span class="lang-high">High</span></div>
+                    </label>
+                </div>
+                <div class="input">
+                    <input id="local-m" type="radio" checked="checked" name="local" value="1">
+                    <label for="local-m">
+                        <div class="check"></div>
+                        <div class="input-label lang-mid" >Medium</div>
+                    </label>
+                </div>
+                <div class="input">
+                    <input id="local-l" type="radio" name="local"  value="0">
+                    <label for="local-l">
+                        <div class="check"></div>
+                        <div class="input-label lang-low">Low</div>
+                    </label>
+                </div>
+            </div>
+            <div class="holder" id="cell">
+                <div class="name" id="lang-netcell">Internet speeds (mobile)</div>
+                <div class="input">
+                    <input id="cell-h" type="radio" name="cell" value="2">
+                    <label for="cell-h">
+                        <div class="check"></div>
+                        <div class="input-label"><span class="lang-high">High</span></div>
+                    </label>
+                </div>
+                <div class="input">
+                    <input id="cell-m" type="radio" checked="checked" name="cell" value="1">
+                    <label for="cell-m">
+                        <div class="check"></div>
+                        <div class="input-label lang-mid" >Medium</div>
+                    </label>
+                </div>
+                <div class="input">
+                    <input id="cell-l" type="radio" name="cell"  value="0">
+                    <label for="cell-l">
+                        <div class="check"></div>
+                        <div class="input-label lang-low">Low</div>
+                    </label>
+                </div>
+            </div>
+            <div class="holder" id="pollution">
+                <div class="name" id="lang-netpollution">Pollution in the area</div>
+                <div class="input">
+                    <input id="pollution-h" type="radio" name="pollution" value="2">
+                    <label for="pollution-h">
+                        <div class="check"></div>
+                        <div class="input-label"><span class="lang-high">High</span></div>
+                    </label>
+                </div>
+                <div class="input">
+                    <input id="pollution-m" type="radio" checked="checked" name="pollution" value="1">
+                    <label for="pollution-m">
+                        <div class="check"></div>
+                        <div class="input-label lang-mid" >Medium</div>
+                    </label>
+                </div>
+                <div class="input">
+                    <input id="pollution-l" type="radio" name="pollution"  value="0">
+                    <label for="pollution-l">
+                        <div class="check"></div>
+                        <div class="input-label lang-low">Low</div>
+                    </label>
+                </div>
+            </div>
             <div class="holder" id="dfs">
                 <div class="name" id="lang-distancefromscrools">Distance from schools</div>
                 <div class="input">
@@ -108,10 +180,10 @@
                     </label>
                 </div>
                 <div class="input">
-                    <input id="dfs-m" type="radio" name="dfs" value="1">
+                    <input id="dfs-m" type="radio" checked="checked" name="dfs" value="1">
                     <label for="dfs-m">
                         <div class="check"></div>
-                        <div class="input-label lang-mid">Medium</div>
+                        <div class="input-label lang-mid" >Medium</div>
                     </label>
                 </div>
                 <div class="input">
@@ -132,10 +204,10 @@
                     </label>
                 </div>
                 <div class="input">
-                    <input id="dfp-m" type="radio" name="dfp"  value="1">
+                    <input id="dfp-m" type="radio" checked="checked" name="dfp"  value="1">
                     <label for="dfp-m">
                         <div class="check"></div>
-                        <div class="input-label lang-mid">Medium</div>
+                        <div class="input-label lang-mid" >Medium</div>
                     </label>
                 </div>
                 <div class="input">
