@@ -170,54 +170,6 @@
                     </label>
                 </div>
             </div>
-            <div class="holder" id="dfs">
-                <div class="name" id="lang-distancefromscrools">Distance from schools</div>
-                <div class="input">
-                    <input id="dfs-h" type="radio" name="dfs" value="2">
-                    <label for="dfs-h">
-                        <div class="check"></div>
-                        <div class="input-label"><span class="lang-high">High</span></div>
-                    </label>
-                </div>
-                <div class="input">
-                    <input id="dfs-m" type="radio" checked="checked" name="dfs" value="1">
-                    <label for="dfs-m">
-                        <div class="check"></div>
-                        <div class="input-label lang-mid" >Medium</div>
-                    </label>
-                </div>
-                <div class="input">
-                    <input id="dfs-l" type="radio" name="dfs"  value="0">
-                    <label for="dfs-l">
-                        <div class="check"></div>
-                        <div class="input-label lang-low">Low</div>
-                    </label>
-                </div>
-            </div>
-            <div class="holder" id="dfp">
-                <div class="name" id="lang-distancefromparks">Distance from parks</div>
-                <div class="input">
-                    <input id="dfp-h" type="radio" name="dfp"  value="2">
-                    <label for="dfp-h">
-                        <div class="check"></div>
-                        <div class="input-label"><span class="lang-high">High</span></div>
-                    </label>
-                </div>
-                <div class="input">
-                    <input id="dfp-m" type="radio" checked="checked" name="dfp"  value="1">
-                    <label for="dfp-m">
-                        <div class="check"></div>
-                        <div class="input-label lang-mid" >Medium</div>
-                    </label>
-                </div>
-                <div class="input">
-                    <input id="dfp-l" type="radio" name="dfp"  value="0">
-                    <label for="dfp-l">
-                        <div class="check"></div>
-                        <div class="input-label lang-low">Low</div>
-                    </label>
-                </div>
-            </div>
             <div class="modal-submit">
                 <div class="button" id="apply">Apply</div>
             </div>
