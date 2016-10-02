@@ -6,6 +6,8 @@ RUN pip install psycopg2 flask
 
 RUN mkdir /app
 
-CMD export FLASK_DEBUG=1; export FLASK_APP=/app/main.py; python -m flask run --host=0.0.0.0
+ADD *.py /app
+
+CMD export FLASK_APP=/app/main.py; python -m flask run --host=0.0.0.0
 
 EXPOSE 5000
