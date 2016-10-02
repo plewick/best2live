@@ -13,6 +13,8 @@ c.execute("SELECT MIN({}) as min, MAX({}) as max FROM {};".format(column, column
 
 mi, mx = c.fetchone()
 
+mx -= mi
+
 if (mx == 0):
     mx = 1;
 

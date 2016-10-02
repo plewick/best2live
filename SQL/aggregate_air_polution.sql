@@ -14,4 +14,4 @@ CREATE INDEX air_polution_data_grid_id_idx
   USING btree
   (grid_id NULLS FIRST);
 
-INSERT INTO air_polution_data (grid_id, value) (SELECT g.id, db_hi FROM prague_grid AS g LEFT JOIN hm_ekola_adp_pasma_den_p AS d ON ST_Within(CAST(g.pos AS geometry), CAST(d.wkb_geometry AS geometry)));
+INSERT INTO air_polution_data (grid_id, value) (SELECT g.id, pm10_rp FROM prague_grid AS g LEFT JOIN sit1000_5lprum_10_14_wgs84 AS d ON ST_Within(CAST(g.pos AS geometry), CAST(d.wkb_geometry AS geometry)));
