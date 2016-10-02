@@ -49,9 +49,7 @@ def hello():
         """SELECT ST_X(n.pos::geometry) as lng, ST_Y(n.pos::geometry) as lat,
           n.down, n.up, n.ping, n.tech, n.pos_id, p.value as pollution from a_netmetr as n
           JOIN air_polution_data as p ON p.grid_id = n.pos_id
-          RIGHT JOIN planet_osm_polygon as prg ON ST_Within(n.pos::geometry, prg.way::geometry)
-          WHERE prg.osm_id = -435514 AND
-          ST_Contains(ST_MakeEnvelope(%s, %s, %s, %s, 4326),
+          WHERE ST_Contains(ST_MakeEnvelope(%s, %s, %s, %s, 4326),
           CAST(n.pos as geometry))
           """, (swlng, swlat, nelng, nelat))
     rows = cur.fetchall()
