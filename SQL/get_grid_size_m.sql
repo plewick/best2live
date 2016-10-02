@@ -1,1 +1,2 @@
 select ST_Distance(p.pos, g.pos) from prague_grid as p join prague_grid as g ON p.id = 3338309 and g.id = 3338310;
+select ST_Distance(p.pos, g.pos) from prague_grid as p join prague_grid as g ON p.id = 8422618 and g.id = 8422619;
