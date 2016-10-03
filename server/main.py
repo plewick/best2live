@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 def _get_engine():
     return psycopg2.connect(
-        "dbname='hacks' user='postgres' host='13.93.50.100' password='Best2livemaps'")
+        "dbname='hacks' user='postgres' host='postgres' password='Best2livemaps'")
 
 
 def net_data(data, res, global_coef):
