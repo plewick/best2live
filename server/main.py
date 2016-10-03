@@ -88,7 +88,8 @@ def hello():
         resp.headers['Content-type'] = 'text/json'
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp
-    except:
+    except Exception as e:
+        print(e)
         return json.dumps([])
 
 
