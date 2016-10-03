@@ -2,15 +2,22 @@ version: '2'
 services:
     web:
         build: www
-        links:
-        - api
         ports:
         - "80:80"
     api:
         build: server
         ports:
         - "5000:5000"
+        links:
+        - postgres
+    postgres:
+        image: mdillon/postgis
+        environment:
+        - PGDATA=/var/lib/postgresql/data/data/
+        - POSTGRES_PASSWORD=Best2livemaps
+        volumes:
+        - data:/var/lib/postgresql/data/data/
 
 volumes:
-    certs:
+    data:
 
